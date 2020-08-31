@@ -8,10 +8,10 @@
             <div class="alert alert-success">{{ session('status') }}</div>
         @endif
         <div class="card">
-            <div class="card-header">Create New User</div>
+            <div class="card-header">@yield('title')</div>
             <div class="card-body">
 
-                <form enctype="multipart/form-data" class="bg-white p-3" action="{{ route('users.store') }}" method="POST">
+                <form enctype="multipart/form-data" class="bg-white p-2" action="{{ route('users.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="name">Name</label>

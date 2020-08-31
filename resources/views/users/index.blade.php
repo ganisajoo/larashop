@@ -3,7 +3,7 @@
 @section('title', 'User List')
 
 @section('content')
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-header">@yield('title')</div>
             <div class="card-body">
@@ -26,13 +26,16 @@
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    @if ($user->avatar)
-                                        <img src="{{ asset('storage/' . $user->avatar) }}" width="70px">
+                                    @if (empty($user->avatar))
+                                        <img src="{{ asset('storage/avatars/default.png') }}" width="70px">
                                     @else
-                                        N/A
+                                        <img src="{{ asset('storage/' . $user->avatar) }}" alt="" width="70px">
                                     @endif
+
+                                <td>
+                                    <a class="btn btn-info text-white btn-sm"
+                                        href="{{ route('users.edit', [$user->id]) }}">Edit</a>
                                 </td>
-                                <td>[TODO: actions]</td>
                             </tr>
                         @endforeach
                     </tbody>

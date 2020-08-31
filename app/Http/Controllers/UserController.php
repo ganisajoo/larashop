@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -46,15 +47,14 @@ class UserController extends Controller
         $new_user->email = $request->get('email');
         $new_user->password = Hash::make($request->get('password'));
 
-        if($request->file('avatar')){
+        if ($request->file('avatar')) {
             $file = $request->file('avatar')->store('avatars', 'public');
-
             $new_user->avatar = $file;
         }
 
-        $new_user->save();
-        return redirect()->route('users.create')->with('status', 'User Successfully Created');        
 
+        $new_user->save();
+        return redirect()->route('users.create')->with('status', 'User Successfully Created');
     }
 
     /**
@@ -76,7 +76,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -88,7 +89,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->name     = $request->get('name');
+        $user->roles    = json_encode($request->get('roles'));
+        $user->address  = $request->get('address');
+        $user->phone    = $request->get('phone');
+
+        if ($user->avatar && file_exists(storage_path('app/public' . $user->avatar))) {
+            Storage::delete('public/' . $user->avatar);
+            $file = $request->file('avatar')->store('avatars', 'public');
+            $user->avatar = $file;
+        }
+
+        return redirect()->route('users.edit', [$id])->with('status', 'User succesfully updated');
     }
 
     /**
