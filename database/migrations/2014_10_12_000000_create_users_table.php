@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('avatar')->nullable();
             $table->enum('status', ["ACTIVE", "INACTIVE"]);
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();            
             $table->rememberToken();
             $table->timestamps();
         });

@@ -16,16 +16,14 @@
                                     <div class="col-md-12">
                                         <label for="email" class="col-sm-12 col-form-label pl-0">
                                             {{ __('E-Mail Address') }}</label>
-                                        <br>
-                                        <input id="email" type="email"
-                                            class="form-control{{ $errors->has('email') ? 'is-invalid' : '' }}" name="email"
-                                            value="{{ old('email') }}" required autofocus>
-                                        @if ($errors->has('email'))
+                                        
+                                        <input id="email" type="email"  class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                            @error('email')
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('email') }}</strong>
-
-                                            </span>
-                                        @endif
+                                                <strong>Email atau Password Salah!!</strong>
+                                            </span>    
+                                            @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -34,11 +32,10 @@
                                             {{ __('Password') }}
                                         </label>
                                         <input id="password" type="password"
-                                            class="form-control{{ $errors->has('password') ? 'is-invalid' : '' }}"
-                                            name="password" required>
-                                        @if ($errors->has('password'))
+                                            class="form-control @error('password') is-invalid'}} @enderror" name="password" required>
+                                        @error('password')
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('password') }}</strong>
+                                                <strong>{{ __('Email atau Password Salah!!')}}</strong>
                                             </span>
                                         @endif
                                     </div>

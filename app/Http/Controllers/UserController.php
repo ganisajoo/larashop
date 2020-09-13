@@ -54,7 +54,7 @@ class UserController extends Controller
 
 
         $new_user->save();
-        return redirect()->route('users.create')->with('status', 'User Successfully Created');
+        return redirect()->route('users.index')->with('status', 'User Successfully Created');
     }
 
     /**
@@ -65,7 +65,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('users.detail', ['user' => $user]);
     }
 
     /**
@@ -102,7 +104,9 @@ class UserController extends Controller
             $user->avatar = $file;
         }
 
-        return redirect()->route('users.edit', [$id])->with('status', 'User succesfully updated');
+        $user->save();
+
+        return redirect()->route('users.index', [$id])->with('status', 'User succesfully updated');
     }
 
     /**
@@ -113,6 +117,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        return redirect()->route('users.index')->with('status', 'User Succesfully Deleted');
     }
 }

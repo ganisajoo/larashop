@@ -21,6 +21,11 @@
             margin: 6rem 0;
         }
 
+        br {
+            display: block;
+            margin: 2rem;
+        }
+
         hr+.display-3,
         hr+.display-2+.display-3 {
             margin-bottom: 2rem;
@@ -29,15 +34,13 @@
     </style>
     <script type="text/javascript">
         document.documentElement.className = document.documentElement.className.replace('no-js', 'js') +
-            (document.implementation.hasFeature(hasFeature("http://www.w3.org/TR/SVG11/feature# BasicStructure",
-                    "1.1") ? ' svg' : ' no-svg');
-
-    </script>
+            (document.implementation.hasFeature(hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure" "1.1") ? ' svg' : ' no-svg');
+            </script>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand p-0 fi">
-        <a class="navbar-brand text-center col-xs-12 col-md-3 col-lg-2 mr-0" href="index.html">
+    <nav class="navbar navbar-expand p-0 fixed-top">
+        <a class="navbar-brand text-center col-xs-12 col-md-3 col-lg-2 mr-0" href="/home">
             Larashop
         </a>
 
@@ -61,13 +64,15 @@
                 <li>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button class="dropdown-item" style="cursor:pointer">Sign Out</button>
+                        <button type="submit" class="dropdown-item" style="cursor: pointer">Sign Out</button>
                     </form>
                 </li>
             </div>
         </div>
     </nav>
 
+    <br>
+    <br>
     <div class="container-fluid h-100 p-0">
         <div style="min-height: 100%" class="flex-row d-flex align-items-stretch m-0">
             <div class="polished-sidebar bg-light col-12 col-md-3 col-lg-2 p-0 collapse d-md-inline" id="sidebar-nav">
@@ -75,19 +80,9 @@
                     <input class="border-dark form-control d-block d-md-none mb-4" type="text" placeholder="Search"
                         aria-label="Search">
                     <li><a href="/home"><span class="oi oi-home"></span>Home</a></li>
-                    <li class="pl-3 d-none d-md-block position-fixed" style="bottom: 1px"><a href=""><span
-                                class="oi oi-cog"></span>Setting</a></li>
-                    <div class="d-block d-md-none">
-                        <div class="dropdown-divider"></div>
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">Setting</a></li>
-                        <li>
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button class="dropdown-item" style="cursor: pointer">Sign Out</button>
-                            </form>
-                        </li>
-                    </div>
+                    <li><a href="{{ route('users.index') }}"><span class="oi oi-people"></span>Manage User</a></li>
+                    <li class="pl-3 d-none d-md-block"><a href=""><span class="oi oi-cog"></span>Setting</a></li>
+                    
                 </ul>
 
             </div>
@@ -95,8 +90,7 @@
                 <div class="row">
                     <div class="col-md-12 pl-3 pt-2">
                         <div class="pl-3">
-                            <h3>@yield("pageTitle")</h3>
-                            <br>
+                            <h3>@yield("title")</h3>
                         </div>
                     </div>
                 </div>
@@ -112,8 +106,8 @@
         integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
-        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
-    </script>
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    @yield('footer_scripts')
 </body>
 
 </html>

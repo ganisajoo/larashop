@@ -7,9 +7,11 @@
         @if (session('status'))
             <div class="alert alert-success">{{ session('status') }}</div>
         @endif
+    <hr class="my-2">
     <div class="card">
-        <div class="card-header">@yield('title')</div>
+        <div class="card-header bg-primary"></div>
         <div class="card-body">
+            <div class="container">
             <form enctype="multipart/form-data" class="bg-white p-2" action="{{ route('users.update', 
             [$user->id]) }}" method="POST">
             @csrf
@@ -88,6 +90,7 @@
         </div>
         <button class="btn btn-primary" type="submit" value="Save">Save</button>
             </form>
+            </div> 
         </div>
         <div class="card-footer"></div>
     </div>

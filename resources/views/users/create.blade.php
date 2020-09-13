@@ -7,8 +7,8 @@
         @if (session('status'))
             <div class="alert alert-success">{{ session('status') }}</div>
         @endif
+        <hr class="my-3">
         <div class="card">
-            <div class="card-header">@yield('title')</div>
             <div class="card-body">
 
                 <form enctype="multipart/form-data" class="bg-white p-2" action="{{ route('users.store') }}" method="POST">
@@ -70,3 +70,5 @@
         </div>
     </div>
 @endsection
+
+

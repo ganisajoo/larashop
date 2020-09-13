@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 
 class AdministratorSeeder extends Seeder
@@ -14,17 +15,20 @@ class AdministratorSeeder extends Seeder
     public function run()
     {
         $administrator = new \App\User;
-        $administrator->username = 'administrator';
-        $administrator->name = 'Site Administrator';
-        $administrator->email = 'administrator@larashop.test';
+        $administrator->username = 'admin';
+        $administrator->name = 'Administrator';
+        $administrator->email = 'admin@mail.id';
         $administrator->roles = json_encode(["ADMIN"]);
-        $administrator->password = Hash::make('larashop');
+        $administrator->password = Hash::make('admin123');
         $administrator->avatar = '';
-        $administrator->address = 'Jakarta Pusat';
+        $administrator->address ='Dimana-mana';
+        $administrator->created_by = 0 ;
+        $administrator->updated_by = 0 ;
+      
 
-        $administrator->save();
+        ($administrator)->save();
 
-        $this->command->info('User admin berhasil diinsert');
+      
 
     }
 }
